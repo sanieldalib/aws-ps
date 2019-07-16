@@ -1,10 +1,9 @@
 
 const request = (method, url, data) => {
-  return $.ajax({
-    url: url,
+  return fetch(url, {
     method: method,
-    data: data,
-    dataType : 'jsonp'
+    body: JSON.stringify(data),
+    headers: {'Content-Type': 'application/json'}
   });
 };
 
@@ -14,18 +13,23 @@ $('#single-form').submit((e) => {
   e.preventDefault();
   var baseURL = $('#base-url-short').val();
   const method = $('#method-short').val() === "SHORTEN" ? 'POST' : 'GET';
+  const data = {};
 
   if (method === 'GET') {
     const path = $('#expandURL').val();
     console.log(path);
     baseURL = `${baseURL}/${path}`;
     console.log(baseURL);
+  } else {
+    baseURL = `${baseURL}/short`
+    data.originalURL = $('#originalURL').val();
+    console.log(data);
   }
 
-  request(method, baseURL).then((res) => {
-    console.log(res);
+  request(method, baseURL, data).then((res) => {
+    console.log(res.json());
   }).catch((err) => {
-    console.log(err);
+    console.log(`ERROR:${err}`);
   })
 })
 
