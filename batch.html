@@ -29,7 +29,27 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container content">
+      <form id="batch-form">
+        <div class="form-group">
+          <label>Batch URL Shortner Microservice Endpoint</label>
+          <input type="text" class="form-control" id="base-url-batch" placeholder="URL">
+          <small class="form-text text-muted">This is the base URL of Batch URL Shortner API.</small>
+        </div>
+
+        <div id="shorten-batch" class="form-group">
+          <label>URLs to Shorten</label>
+          <button id="batch-add-shorten" type="button" class="btn-sm btn-outline-secondary add-btn">Add +</button>
+          <small class="form-text text-muted">These are the URLs you want to shorten - be sure to include https://www.</small>
+          <input type="text" class="form-control input-batch" placeholder="https://www.google.com/example">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="output">
+        <h3>API Response:</h3>
+        <pre id="batch-output"></pre>
+      </div>
     </div>
 
       <!-- Scripts -->

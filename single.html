@@ -48,13 +48,19 @@
         <div id="shorten-single" class="form-group">
           <label>URL to Shorten</label>
           <input type="text" class="form-control" id="originalURL" placeholder="https://www.google.com/example">
+          <small class="form-text text-muted">This is the URL you want to shorten - be sure to include https://www.</small>
         </div>
         <div id="expand-single" class="form-group hidden">
           <label>URL to Expand</label>
-          <input type="text" class="form-control" id="expandURL" placeholder="https://www.google.com/example">
+          <input type="text" class="form-control" id="expandURL" placeholder="7a3j1dR">
+          <small class="form-text text-muted">This is the shortened URL you want to expand. Only include characters beyond the base url.</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <div class="output">
+        <h3>API Response:</h3>
+        <pre id="single-output"></pre>
+      </div>
     </div>
 
       <!-- Scripts -->
