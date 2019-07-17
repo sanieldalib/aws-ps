@@ -29,3 +29,9 @@ pre {
 .jumbotron {
   margin-top: 20px;
 }
+
+.bookmark-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

@@ -14,8 +14,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/single.html">Single URL Shortener</a>
@@ -24,13 +24,63 @@
             <a class="nav-link" href="/batch.html">Batch URL Shortener</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/bookmark.html">Bookmark Service</a>
+            <a class="nav-link" href="/bookmark.html">Bookmark Service<span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container content">
+      <form id="bookmark-form">
+        <div class="form-group">
+          <label>Bookmark Microservice Endpoint</label>
+          <input type="text" class="form-control" id="base-url-bookmark" placeholder="URL">
+          <small class="form-text text-muted">This is the base URL of Batch URL Shortner API.</small>
+        </div>
 
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Action</label>
+          <select class="form-control" id="method-bookmark">
+            <option>POST</option>
+            <option>GET</option>
+          </select>
+        </div>
+        <div id="create-bookmark" class="form-group">
+          <label>Bookmarks</label>
+          <input type="text" class="form-control" id="bookmark-title" placeholder="bookmark-title">
+          <small class="form-text text-muted">This is the title for your bookmark. This cannot contain spaces.</small>
+          <br>
+          <hr>
+
+          <div class="bookmark-header">
+            <h4>Bookmark Items</h4>
+            <button id="bookmark-add-btn" type="button" class="btn-sm btn-outline-secondary add-btn">Add +</button>
+          </div>
+
+          <div class="row">
+            <div id="titles" class="col-6">
+              <label>Titles</label>
+              <input type="text" class="form-control input-batch" placeholder="link-title">
+            </div>
+            <div id="links" class="col-6">
+              <label>Links</label>
+              <input type="text" class="form-control input-batch" placeholder="https://www.google.com/example">
+            </div>
+        </div>
+      </div>
+        <hr>
+
+        <div id="get-bookmark" class="form-group hidden">
+          <label>Bookmark to Get</label>
+          <input type="text" class="form-control" id="getTitle" placeholder="7a3j1dR">
+          <small class="form-text text-muted">This is the title of the bookmark you want to get. This cannot contain spaces.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="output">
+        <h3>API Response:</h3>
+        <pre id="bookmark-output"></pre>
+      </div>
     </div>
 
       <!-- Scripts -->

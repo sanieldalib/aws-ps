@@ -34,7 +34,6 @@ $('#single-form').submit((e) => {
 
   if (method === 'GET') {
     const path = $('#expandURL').val();
-    console.log(path);
     baseURL = `${baseURL}/${path}`;
     window.open(baseURL, '_blank');
   } else {
@@ -74,7 +73,7 @@ $('#method-batch').change(() => {
   if (selectedMethod === "SHORTEN") {
     $('#expand-batch').addClass('hidden');
     $('#shorten-batch').removeClass('hidden');
-  } else{
+  } else {
     $('#expand-batch').removeClass('hidden');
     $('#shorten-batch').addClass('hidden');
   }
@@ -90,9 +89,56 @@ $('#batch-form').submit(e => {
   }).then(res => {
     document.getElementById("batch-output").innerHTML = JSON.stringify(res, undefined, 2);
   })
-
-
-  console.log(inputs);
-
-
 });
+
+//BOOKMARK SERVICE
+
+$('#bookmark-add-btn').click(() => {
+  $('#titles').append('<input type="text" class="form-control input-batch" placeholder="link-title">');
+  $('#links').append('<input type="text" class="form-control input-batch" placeholder="https://www.google.com/example">');
+})
+
+$('#bookmark-form').submit(e => {
+  e.preventDefault();
+  const baseURL = $('#base-url-bookmark').val() + '/bookmark';
+  const title = $('#bookmark-title').val();
+  const getTitle = $('#getTitle').val();
+  const titles = getInputs($('#titles > input'));
+  const urls = getInputs($('#links > input'));
+
+  const links = urls.map((item, i) => {
+    return {
+      title: titles[i],
+      url: item
+    }
+  });
+
+  const selectedMethod = $('#method-bookmark').val();
+
+  if (selectedMethod === "GET") {
+    request('GET', `${baseURL}/${getTitle}`).then(response => {
+      return response.json();
+    }).then(res => {
+      console.log(res);
+      document.getElementById("bookmark-output").innerHTML = JSON.stringify(res, undefined, 2);
+    })
+  } else {
+    request('POST', baseURL, { title: title, links: links}).then(response => {
+      return response;
+    }).then(res => {
+      console.log();
+      document.getElementById("bookmark-output").innerHTML = `This endpoint does not return a body. \nStatus Code: ${res.status}`;
+    })
+  }
+});
+
+$('#method-bookmark').change(() => {
+  const selectedMethod = $('#method-bookmark').val();
+  if (selectedMethod === "GET") {
+    $('#create-bookmark').addClass('hidden');
+    $('#get-bookmark').removeClass('hidden');
+  } else {
+    $('#create-bookmark').removeClass('hidden');
+    $('#get-bookmark').addClass('hidden');
+  }
+})
